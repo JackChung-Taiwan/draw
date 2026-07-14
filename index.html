@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="互動式 Python 畫圖函式教學網站，可直接在瀏覽器執行 Matplotlib 程式並預覽圖表。" />
+  <meta name="theme-color" content="#173f67" />
+  <title>Python 畫圖實驗室｜線上執行與即時預覽</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#lab">跳到程式實驗室</a>
+
+  <header class="hero">
+    <nav class="nav" aria-label="主要導覽">
+      <div class="brand"><span class="brand-mark">Py</span><span>Python 畫圖實驗室</span></div>
+      <div class="nav-links">
+        <a href="#lab">線上實作</a>
+        <a href="#functions">常用函式</a>
+        <a href="#steps">學習步驟</a>
+      </div>
+    </nav>
+
+    <div class="hero-content">
+      <div>
+        <span class="eyebrow"><span class="eyebrow-dot"></span>免安裝・瀏覽器直接執行</span>
+        <h1>用 Python<br />把資料畫成圖</h1>
+        <p>選擇範例、修改程式、按下執行，立即看見 Matplotlib 圖表。適合 Python 初學者、資訊課與資料視覺化入門。</p>
+        <div class="hero-actions">
+          <a class="hero-btn primary" href="#lab">開始畫圖</a>
+          <a class="hero-btn secondary" href="#functions">查看函式速查</a>
+        </div>
+      </div>
+
+      <div class="hero-card" aria-hidden="true">
+        <div class="hero-card-top">
+          <span class="window-dots"><i></i><i></i><i></i></span>
+          <span class="mini-status">● browser_python.py</span>
+        </div>
+        <pre class="hero-code"><span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+
+x = [1, 2, 3, 4, 5]
+y = [3, 7, 5, 11, 9]
+
+plt.<span class="fn">plot</span>(x, y, marker=<span class="str">"o"</span>)
+plt.<span class="fn">title</span>(<span class="str">"My First Chart"</span>)
+plt.<span class="fn">grid</span>(alpha=0.3)
+plt.<span class="fn">show</span>()</pre>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <section id="lab" class="lab-shell" aria-labelledby="lab-heading">
+      <div class="lab-header">
+        <div class="lab-title">
+          <div class="lab-title-icon">&gt;_</div>
+          <div>
+            <h2 id="lab-heading">Python 線上畫圖實驗室</h2>
+            <p>程式只在您的瀏覽器中執行，不會上傳到伺服器。</p>
+          </div>
+        </div>
+        <div id="runtimeStatus" class="runtime-status" role="status" aria-live="polite">正在載入 Python 環境</div>
+      </div>
+
+      <div class="lab-grid">
+        <aside class="examples-panel" aria-label="繪圖範例">
+          <h3>選擇範例</h3>
+          <div id="exampleList" class="example-list"></div>
+          <div class="tip-box"><strong>操作提示</strong><br />先選範例，再修改數字、文字或顏色。按 <b>Ctrl + Enter</b> 可快速執行。</div>
+        </aside>
+
+        <div class="workspace">
+          <div class="toolbar">
+            <div class="toolbar-group">
+              <button id="runBtn" class="tool-btn run" type="button" disabled>▶ 執行程式</button>
+              <button id="stopBtn" class="tool-btn stop" type="button" disabled>■ 停止</button>
+              <button id="resetBtn" class="tool-btn" type="button">↺ 還原範例</button>
+            </div>
+            <div class="toolbar-group">
+              <button id="copyBtn" class="tool-btn" type="button">複製程式</button>
+              <button id="downloadCodeBtn" class="tool-btn" type="button">下載 .py</button>
+              <button id="downloadChartBtn" class="tool-btn" type="button" disabled>下載圖片</button>
+            </div>
+            <span class="shortcut">快捷鍵：Ctrl / ⌘ + Enter</span>
+          </div>
+
+          <div class="editor-preview">
+            <div class="editor-pane">
+              <div class="pane-label"><span>main.py</span><span id="lineCount">1 行</span></div>
+              <textarea id="codeEditor" aria-label="Python 程式碼編輯器" spellcheck="false"></textarea>
+            </div>
+
+            <div class="preview-pane">
+              <div class="pane-label"><span>圖表預覽</span><span id="executionTime">尚未執行</span></div>
+              <div class="preview-area">
+                <div id="previewPlaceholder" class="preview-placeholder">
+                  <strong>準備好開始畫圖了嗎？</strong>
+                  Python 環境載入完成後，按下「執行程式」即可在這裡看到結果。
+                </div>
+                <img id="chartImage" alt="Python 程式產生的圖表" />
+              </div>
+              <div id="consoleOutput" class="console" aria-live="polite">系統訊息會顯示在這裡。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="functions" class="section" aria-labelledby="functions-heading">
+      <div class="section-heading">
+        <span class="section-kicker">Matplotlib Quick Reference</span>
+        <h2 id="functions-heading">六個最常用的畫圖函式</h2>
+        <p>先掌握「建立圖表、加入資訊、調整外觀」三個層次，就能完成大多數基礎圖表。</p>
+      </div>
+      <div class="function-grid">
+        <article class="function-card"><div class="number">01</div><h3>plt.plot()</h3><p>繪製折線圖，適合呈現時間趨勢或連續變化。</p><code>plt.plot(x, y, marker="o")</code></article>
+        <article class="function-card"><div class="number">02</div><h3>plt.bar()</h3><p>繪製長條圖，用來比較不同類別的數值。</p><code>plt.bar(labels, values)</code></article>
+        <article class="function-card"><div class="number">03</div><h3>plt.scatter()</h3><p>繪製散佈圖，觀察兩組數值之間的關係。</p><code>plt.scatter(x, y, s=80)</code></article>
+        <article class="function-card"><div class="number">04</div><h3>plt.pie()</h3><p>繪製圓餅圖，呈現各類別占整體的比例。</p><code>plt.pie(values, labels=labels)</code></article>
+        <article class="function-card"><div class="number">05</div><h3>plt.title()</h3><p>加入圖表標題，讓讀者快速理解圖表主題。</p><code>plt.title("Chart Title")</code></article>
+        <article class="function-card"><div class="number">06</div><h3>plt.grid()</h3><p>加入格線，幫助讀者比較座標與數值大小。</p><code>plt.grid(alpha=0.3)</code></article>
+      </div>
+    </section>
+
+    <section id="steps" class="section" aria-labelledby="steps-heading">
+      <div class="section-heading">
+        <span class="section-kicker">Learning Path</span>
+        <h2 id="steps-heading">三步驟完成第一張圖</h2>
+        <p>每一個範例都遵循相同結構。熟悉後，只要替換資料與函式，就能畫出不同圖表。</p>
+      </div>
+      <div class="steps">
+        <article class="step"><strong>STEP 1</strong><h3>準備資料</h3><p>使用串列或 NumPy 陣列建立 x、y 數值，先確認資料長度是否一致。</p></article>
+        <article class="step"><strong>STEP 2</strong><h3>選擇圖表</h3><p>趨勢用 plot、比較用 bar、關係用 scatter、比例用 pie。</p></article>
+        <article class="step"><strong>STEP 3</strong><h3>補上說明</h3><p>加入標題、座標名稱、圖例與格線，讓圖表清楚又容易閱讀。</p></article>
+      </div>
+      <div class="notice">
+        <div class="notice-icon">💡</div>
+        <div><strong>中文圖表標籤提醒</strong>瀏覽器版 Python 使用的預設字型可能不含完整中文字形。若圖表中的中文字顯示為方框，可先使用英文標題與標籤；網站介面本身不受影響。</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>Python 畫圖實驗室 · 使用 Pyodide 在瀏覽器執行 Python · 教學用途</footer>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
